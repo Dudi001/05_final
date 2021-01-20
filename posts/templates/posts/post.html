@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ post.author.get_full_name }}{% endblock %}
+{% block header %}Пост {{ post.author.get_full_name }}{% endblock %}
+{% block content %}
+{%  load thumbnail %}
+<main role="main" class="container">
+    <div class="row">
+        {% include "posts/includes/profile_main.html" with user_profile=user_profile %}
+        <div class="col-md-9">
+        {% include "posts/includes/post_item.html" with post=post %}
+     </div>
+    </div>
+</main>
+{% include "posts/comments.html" with post=post %}
+{% endblock %}

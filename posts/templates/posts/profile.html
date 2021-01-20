@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ post.author.get_full_name }}{% endblock %}
+{% block header %}Профиль пользователя {{ post.author.get_full_name }}{% endblock %}
+{% block content %}
+
+
+<main role="main" class="container">
+    <div class="row">
+        {% include "posts/includes/profile_main.html" with user_profile=user_profile %}
+
+            <div class="col-md-9">                
+                {% for post in page %}
+                {% include "posts/includes/post_item.html" with post=post %}
+
+                {% endfor %}
+                
+
+                {% if page.has_other_pages %}
+                {% include "includes/paginator.html" with items=page paginator=paginator %}
+                {% endif %}
+     </div>
+    </div>
+</main> 
+
+{% endblock %}
