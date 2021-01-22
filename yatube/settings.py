@@ -85,7 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -95,7 +94,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 
 STATIC_URL = '/static/'
@@ -109,7 +107,7 @@ SITE_ID = 1
 # Login
 
 LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = 'index' 
+LOGIN_REDIRECT_URL = 'index'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
