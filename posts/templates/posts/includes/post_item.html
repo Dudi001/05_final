@@ -10,7 +10,7 @@
     <p class="card-text">
       <!-- Ссылка на автора через @ -->
       <a name="post_{{ post.id }}" href="{% url 'profile' post.author.username %}">
-        <strong class="d-block text-gray-dark">@{{ post.author }}</strong>
+        <strong class="d-block text-gray-dark">@{{ post.author.username }}</strong>
       </a>
       {{ post.text|linebreaksbr }}
     </p>
@@ -31,9 +31,11 @@
           Комментариев: {{ post.comments.count }}
         </div>
         {% endif %}
+        {% if request.user.is_authenticated %}
         <a class="btn btn-sm btn-primary" href="{% url 'post' post.author.username post.id %}" role="button">
           Добавить комментарий
         </a>
+        {% endif %}
         <!-- Ссылка на редактирование поста для автора -->
         {% if user == post.author %}
         <a class="btn btn-sm btn-outline-info" href="{% url 'post_edit' post.author.username post.id %}" role="button">
@@ -43,7 +45,7 @@
       </div>
 
       <!-- Дата публикации поста -->
-      <small class="text-muted">{{ post.pub_date }}</small>
+      <small class="text-muted">{{ post.pub_date|date:"d M Y" }}</small>
     </div>
   </div>
 </div>

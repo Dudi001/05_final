@@ -1,21 +1,17 @@
 {% extends "base.html" %}
-{% block title %} Последние обновления {% endblock %}
+{% block title %}Последние обновления{% endblock %}
+{% block header %}Последние обновления на сайте{% endblock %}
 {% load cache %}
 {% block content %}
     <div class="container">
         {% cache 20 sidebar request.user.username %}
         {% include "posts/includes/menu.html" with index=True %}
-
-           <h1> Последние обновления на сайте</h1>
-            
                 {% for post in page %}
                     {% include "posts/includes/post_item.html" with post=post %}
                 {% endfor %}
         {% endcache %} 
     </div>
 
-        {% if page.has_other_pages %}
-            {% include "includes/paginator.html" with items=page paginator=paginator%}
-        {% endif %}
+        {% include "includes/paginator.html" with items=page paginator=paginator%}
        
 {% endblock %} 

@@ -3,6 +3,10 @@ env/
 venv/
 .venv
 .venv/
+.vscode/
+.htmcov/
+/vscode/
+/htmcov/
 
 __pycache__/
 *.py[cod]
@@ -15,6 +19,8 @@ __pycache__/
 *.sublime-project
 *.sublime-workspace
 
+sent_emails/
+/sent_emails/
 static/
 posts/static/
 media/

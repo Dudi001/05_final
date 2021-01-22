@@ -30,7 +30,7 @@ urlpatterns = [
     path('500/', views.server_error, name='500'),
 
     path(
-        "<username>/<int:post_id>/comment",
+        "<username>/<int:post_id>/comment/",
         views.add_comment,
         name="add_comment"
     ),

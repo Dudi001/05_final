@@ -5,7 +5,7 @@
                                 {{ post.author.get_full_name}}
                         </div>
                         <div class="h3 text-muted">
-                                @{{ author }}
+                                @{{ author.username }}
                         </div>
         </div>
                 <ul class="list-group list-group-flush">
@@ -15,6 +15,7 @@
                                 Подписки: {{ author.follower.count }}
                                 </div>
                         </li>
+                        {% if user.is_authenticated and author.username != user.username %}
                         <li class="list-group-item">     
                                 {% if following %}
                                 <a class="btn btn-lg btn-light" href="{% url 'profile_unfollow' author.username %}" role="button">Отписаться</a>
@@ -22,6 +23,7 @@
                                 <a class="btn btn-lg btn-primary" href="{% url 'profile_follow' author.username %}" role="button">Подписаться</a>
                                 {% endif %}
                         </li>
+                        {% endif %}
                         <li class="list-group-item">
                                 <div class="h6 text-muted">
                                    Кол-во постов: {{ author.posts.count }} 

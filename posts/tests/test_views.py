@@ -71,15 +71,37 @@ class PostsViewTests(TestCase):
                 kwargs={'username': self.user}
             )
         )
-        unfollows = Follow.objects.count()
-        self.assertEqual(unfollows, 0)
+        self.assertFalse(
+            Follow.objects.filter(
+                user=self.follower,
+                author=self.user
+            ),
+        )
 
     def test_unfollower_follow_index(self):
         """Посты не появляются у неподписчика"""
-        response = self.authorized_unfollower.get(
-            reverse('follow_index')
+        self.authorized_follower.get(reverse(
+            'profile_follow',
+            kwargs={
+                'username': self.user
+            }))
+
+        posts = Post.objects.filter(
+            author__following__user=self.follower)
+
+        response_follower = self.authorized_follower.get(
+            reverse('follow_index'))
+        response_author = self.authorized_client.get(
+            reverse('follow_index'))
+
+        self.assertIn(
+            posts.get(),
+            response_follower.context['paginator'].object_list,
         )
-        self.assertFalse(response.context['page'])
+        self.assertNotIn(
+            posts.get(),
+            response_author.context['paginator'].object_list,
+        )
 
     def test_auth_user_can_comment(self):
         """Только авторизированный пользователь может комментировать посты"""
@@ -437,7 +459,6 @@ class CacheViewTest(TestCase):
         Post.objects.bulk_create([Post(text=f'Test{i}', author=self.user)
                                   for i in range(3)])
 
-        # Вычисление колличества записей context и колличества записей в базе
         context_cache_data_len = response.context['paginator'].count,
         post_context_cache_len = Post.objects.count()
 
