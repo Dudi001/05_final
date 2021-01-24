@@ -44,7 +44,7 @@ class PostModelTest(TestCase):
 
     def test_help_text(self):
         '''help_text в полях совпадает с ожидаемым.'''
-        task = PostModelTest.post
+        post = PostModelTest.post
         field_help_texts = {
             'text': 'Заполнить*',
             'group': 'Выберите группу',
@@ -52,16 +52,16 @@ class PostModelTest(TestCase):
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):
                 self.assertEqual(
-                    task._meta.get_field(value).help_text, expected
+                    post._meta.get_field(value).help_text, expected
                 )
 
     def test_str_post(self):
         '''Тестируем длину __str__ значения в модели Post'''
-        task = PostModelTest.post
-        self.assertEqual(task.__str__(), task.text[:15])
+        post = PostModelTest.post
+        self.assertEqual(post.__str__(), post.text[:20])
 
     def test_str_group(self):
         '''Тестируем длину __str__ значения в модели Group'''
         group = PostModelTest.group
-        task = self.group.title
-        self.assertEqual(group.__str__(), task)
+        group = self.group.title
+        self.assertEqual(group.__str__(), group)

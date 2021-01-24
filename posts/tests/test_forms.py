@@ -29,17 +29,23 @@ class PostURLTests(TestCase):
             group=cls.group,
         )
 
-    def test_forms_views(self):
-        form_data = {
-            'group': self.group.id,
-            'text': 'Тестовая запись',
-        }
-        response = self.authorized_client.post(
-            reverse('post_new'),
-            data=form_data,
-            follow=True
-        )
-        self.assertRedirects(response, reverse('index'))
+    def test_forms_views(self): 
+        count = Post.objects.count()
+ 
+        form_data = { 
+            'group': self.group.id, 
+            'text': 'Тестовая запись', 
+        } 
+        self.authorized_client.post( 
+            reverse('post_new'), 
+            data=form_data, 
+            follow=True 
+        ) 
+        post_view = Post.objects.first() 
+        self.assertEqual(Post.objects.count(), count + 1) 
+        self.assertEqual(post_view.text, form_data['text']) 
+        self.assertEqual(post_view.author, self.user) 
+        self.assertEqual(post_view.group, self.group) 
 
     def test_edit_post(self):
         '''Тестируем изменение поста.'''

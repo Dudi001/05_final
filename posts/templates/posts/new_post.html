@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
-{% block title %}{% if post %}Редактирование поста{% else %}Новая запись{% endif %}{{ group }}{% endblock %}
-{% block header %}{% if post %}Редактирование поста{% else %}Новая запись{% endif %}{{ group }}{% endblock %}
+{% block title %}{% if post %}Редактирование поста{% else %}Новая запись{% endif %}{% endblock %}
+{% block header %}{% if post %}Редактирование поста{% else %}Новая запись{% endif %}{% endblock %}
 {% block content %} 
  
 {% load user_filters %}
@@ -19,7 +19,7 @@
             <div class="card-body"> 
                     {% for error in form.errors %} 
                         <div class="alert alert-danger" role="alert"> 
-                            {{ error|escapejs }} 
+                            {{ error|escape }} 
                         </div> 
                     {% endfor %}
                     <form method="post" enctype="multipart/form-data" action="{% url 'post_new' %}">
