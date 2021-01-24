@@ -31,7 +31,7 @@ class PostURLTests(TestCase):
 
     def test_forms_views(self):
         count = Post.objects.count()
- 
+
         form_data = {
             'group': self.group.id,
             'text': 'Тестовая запись',
@@ -39,7 +39,7 @@ class PostURLTests(TestCase):
         self.authorized_client.post(
             reverse('post_new'),
             data=form_data,
-            follow=True 
+            follow=True
         )
         post_view = Post.objects.first()
         self.assertEqual(Post.objects.count(), count + 1)
