@@ -21,8 +21,6 @@ __pycache__/
 
 sent_emails/
 /sent_emails/
-static/
-posts/static/
-media/
 
-db.sqlite3
+
+

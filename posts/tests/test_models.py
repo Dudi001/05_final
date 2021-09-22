@@ -22,7 +22,7 @@ class PostModelTest(TestCase):
             description='тестовое описание'
         )
         cls.post = Post.objects.create(
-            text='Тестовый текст',
+            text='Тестотовый пост для проверки',
             author=cls.user,
             group=cls.group,
         )
@@ -58,7 +58,7 @@ class PostModelTest(TestCase):
     def test_str_post(self):
         '''Тестируем длину __str__ значения в модели Post'''
         post = PostModelTest.post
-        self.assertEqual(post.__str__(), post.text[:20])
+        self.assertEqual(post.__str__(), post.text[:15])
 
     def test_str_group(self):
         '''Тестируем длину __str__ значения в модели Group'''
